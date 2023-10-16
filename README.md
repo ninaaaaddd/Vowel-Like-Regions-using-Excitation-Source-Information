@@ -1,5 +1,8 @@
 # Vowel-Like-Regions-using-Excitation-Source-Information
-Detection of Vowel Like Regions in Speech Signal using excitation source information of the signal. The Detected Regions can be used to extract features for speech classification with the help of Machine Learning and Deep Learning.
+- Detection of Vowel Like Regions in Speech Signal using excitation source information of the signal. The Detected Regions can be used to extract features for speech classification with the help of Machine Learning and Deep Learning.
+- Excitation Source Information from the Speech Signal is extracted with the help of Hilbert Envelope of Linear Prediction Residual of Speech Signal and the Zero Frequency Filtered Output of the Speech Signal.
+- First Order Gaussian Differential Operator is used to produce Vowel Onset Point and Vowel End Point Evidence Plots where the Peaks in the plot indicate the Onset and Offset Points at the corresponding time stamps.
+  
 
 # Inference for a single File:
 - Navigate to the VOP_plot.ipynb notebook and enter the path of audio file.
