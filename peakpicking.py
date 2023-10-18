@@ -16,7 +16,7 @@ def peakpickingVOP(evidence,VLROP_th):
 
     # To remove the spurious  negative  to positive  zero crossing
 
-    npz_indices1 = np.nonzero(npz_spu)[0].astype(int)
+    npz_indices1 = np.where(npz_spu!=0)[0].astype(int)
 
 
     for i in range(0,len(npz_indices1)-1):
@@ -28,18 +28,16 @@ def peakpickingVOP(evidence,VLROP_th):
     
     ind_npz_final = npz_indices1[npz_indices1 != 0]
 
-    #To find peak location between two zerocrossings % % % % % % % %%
-
     maxvalue_indices = []
-    if max(evidence[0: ind_npz_final[0]+1]) == 0:
+    if max(evidence[0: ind_npz_final[0]]) == 0:
 
         for j in range(0,len(ind_npz_final)-1):
             temp=evidence[ind_npz_final[j]:ind_npz_final[j+1]+1]
-            ind_temp=max(np.where(temp==max(temp))[0])
+            ind_temp=min(np.where(temp==max(temp))[0])
             maxvalue_indices.append(ind_temp)
 
         temp=evidence[ind_npz_final[-1]:]
-        ind_temp=max(np.where(temp==max(temp))[0])
+        ind_temp=min(np.where(temp==max(temp))[0])
         maxvalue_indices.append(ind_temp)
         peak_loc = ind_npz_final+maxvalue_indices
 
@@ -47,17 +45,17 @@ def peakpickingVOP(evidence,VLROP_th):
 
         for j in range(0, len(ind_npz_final)-1):
             temp = evidence[ind_npz_final[j]:ind_npz_final[j+1]+1]
-            ind_temp = max(np.where(temp == max(temp))[0])
+            ind_temp = min(np.where(temp == max(temp))[0])
             maxvalue_indices.append(ind_temp)
 
         temp = evidence[ind_npz_final[-1]:]
-        ind_temp = max(np.where(temp == max(temp))[0])
+        ind_temp = min(np.where(temp == max(temp))[0])
         maxvalue_indices.append(ind_temp)
         peak_loc = ind_npz_final+maxvalue_indices
 
         maxvalue_indices_abnormal=[]
-        temp_2 = evidence[0:ind_npz_final[0]+1]
-        ind_temp_2 = max(np.where(temp_2 == max(temp_2))[0])
+        temp_2 = evidence[0:ind_npz_final[0]]
+        ind_temp_2 = min(np.where(temp_2 == max(temp_2))[0])
         maxvalue_indices_abnormal.append(ind_temp_2)
 
         peak_loc=np.array(list(maxvalue_indices_abnormal)+list(peak_loc))

@@ -16,7 +16,7 @@ def zerofrequency(out1,winsize,fs,Gd,Speech_Rate):
     exccont_2d=np.zeros(len(zffo))
     framesize2=int(np.ceil(5*fs/(1000*Speech_Rate)))
 
-    for i in range(len(excfeat_2d)-20*framesize2 - 1):
+    for i in range(len(excfeat_2d)-20*framesize2):
     
         mxvalue2=max(excfeat_2d[i:i+framesize2])
         
@@ -26,8 +26,11 @@ def zerofrequency(out1,winsize,fs,Gd,Speech_Rate):
 
     n2=convolve(exccont_2d1, Gd)
     #exccont_2d11=exccont_2d1(ceil(401/Speech_Rate):length(n2)-ceil(400/Speech_Rate));
-    n21=n2[400:len(n2)-400-1]
+    n21=n2[400-1:len(n2)-400]
 
     y2=n21/max(np.abs(n21))
+
+    zeros_to_append = np.zeros(len(out1)-len(y2))
+    y2 = np.append(y2, zeros_to_append)
 
     return y2,zffo, gclocssp1,exccont_2d1

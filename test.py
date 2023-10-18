@@ -1,5 +1,3 @@
 import numpy as np
 
-a=np.array([-0.5,0.5,1])
-b=np.array([0.5,0.5,0.5])
-print(a/b)
+print(np.append([1, 2, 3], np.zeros(2)).astype(int))

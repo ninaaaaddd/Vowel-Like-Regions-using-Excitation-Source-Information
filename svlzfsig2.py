@@ -3,14 +3,14 @@ from scipy.signal import convolve
 
 def remTrend(sig,winsize):
     window=np.ones(winsize)
-    rm=convolve(sig,window)
-    rm=rm[int((winsize/2) - 1) : int(len(rm) - (winsize/2) - 1)]
+    rm=convolve(sig,window,mode='full')
+    rm=rm[int((winsize/2) - 1) : int(len(rm) - (winsize/2))]
 
-    norm = convolve(np.ones(len(sig)),window)
-    norm = norm[int((winsize/2) - 1): int(len(norm) - (winsize/2) - 1)]
+    norm = convolve(np.ones(len(sig)),window,mode='full')
+    norm = norm[int((winsize/2) - 1): int(len(norm) - (winsize/2))]
 
     rm=rm/norm
-    rm=np.append(rm,0)
+    # rm=np.append(rm,0)
     # print(rm)
     out=sig-rm
     return out
